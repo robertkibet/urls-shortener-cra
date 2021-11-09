@@ -30,8 +30,10 @@ export const InputWrapper = styled.div<InputWrapperInterface>`
 
   span {
     position: absolute;
-    bottom: -25px;
-    left: 20px;
+    top: -28px;
+    left: 0;
+    right: 0;
+    text-align: center;
     color: ${({ error }) => (error ? themeColors.error : themeColors.primary)};
   }
 `;
