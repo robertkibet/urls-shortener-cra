@@ -6,7 +6,7 @@ const UrlShortener: React.FC = () => {
   return (
     <Wrapper>
       <Input type="text" />
-      <SubmitButton title="Shorten" type="submit" size="small" />
+      <SubmitButton title="Shorten" type="submit" />
     </Wrapper>
   );
 };
