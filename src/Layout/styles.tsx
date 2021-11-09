@@ -8,16 +8,13 @@ export const MainLayout = styled.div`
   box-sizing: border-box;
 `;
 export const Container = styled.div`
-  display: block;
   max-width: 1440px;
   width: 100%;
   box-sizing: border-box;
   padding: 0 20px;
-
-  @media (max-width: 600px) {
-    display: grid;
-    grid-template-rows: 200px 1fr;
-    justify-items: center;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
 `;

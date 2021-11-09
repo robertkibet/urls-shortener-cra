@@ -3,11 +3,11 @@ import React from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-// import { BitlyClient } from 'bitly-react';
+
+// https://www.npmjs.com/package/tinyurl
+import TinyURL from 'tinyurl';
 import { Wrapper, SubmitButton, InputWrapper, Input } from './styles';
 import IS_ADDING_HISTORY from '../../Reducers/actions';
-// leaving this token here for now, very much discourage. Using it for demo only ;)
-// const bitly = new BitlyClient('d9a10e57e45b27fec4c3d4451afa2896c3f6f9c2', {});
 
 interface Values {
   urlInput: string;
@@ -34,12 +34,12 @@ const UrlShortener: React.FC = () => {
 
   const handleFormSubmit: any = async (values: Values, { setSubmitting, resetForm }: FormikHelpers<Values>) => {
     try {
-      // const shortUrl = await bitly.shorten(values.urlInput);
+      const shortUrl = await TinyURL.shorten(values.urlInput);
       dispatch({
         type: IS_ADDING_HISTORY,
         payload: {
           url: values.urlInput,
-          shortUrl: '',
+          shortUrl,
         },
       });
       setSubmitting(false);
@@ -64,7 +64,14 @@ const UrlShortener: React.FC = () => {
         <Form onSubmit={handleSubmit}>
           <Wrapper>
             <InputWrapper error={!!errors?.urlInput}>
-              <Input id="urlInput" name="urlInput" value={values.urlInput} onChange={handleChange} onBlur={handleBlur} />
+              <Input
+                placeholder="enter your url to shorten"
+                id="urlInput"
+                name="urlInput"
+                value={values.urlInput}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
               {errors?.urlInput && <span>{errors.urlInput}</span>}
             </InputWrapper>
             <SubmitButton disabled={isSubmitting || !!errors?.urlInput} title="Shorten" type="submit" />

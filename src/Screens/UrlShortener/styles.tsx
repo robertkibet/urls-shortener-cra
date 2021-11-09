@@ -5,17 +5,12 @@ import Button from '../../Components/Button';
 import themeColors from '../../Theme';
 
 export const Wrapper = styled.div`
-  height: 200px;
+  height: 130px;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-row: 1fr 1fr;
+  justify-items: center;
   align-items: center;
-
-  @media (max-width: 600px) {
-    align-items: end;
-    height: 150px;
-  }
   @media (min-width: 600px) {
     gap: 20px;
   }
