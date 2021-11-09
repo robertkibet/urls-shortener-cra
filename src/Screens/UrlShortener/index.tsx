@@ -1,9 +1,13 @@
+// @ts-nocheck
 import React from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+// import { BitlyClient } from 'bitly-react';
 import { Wrapper, SubmitButton, InputWrapper, Input } from './styles';
 import IS_ADDING_HISTORY from '../../Reducers/actions';
+// leaving this token here for now, very much discourage. Using it for demo only ;)
+// const bitly = new BitlyClient('d9a10e57e45b27fec4c3d4451afa2896c3f6f9c2', {});
 
 interface Values {
   urlInput: string;
@@ -27,6 +31,25 @@ const isValidHttpUrl = (urlValue?: string): boolean => {
 
 const UrlShortener: React.FC = () => {
   const dispatch = useDispatch();
+
+  const handleFormSubmit: any = async (values: Values, { setSubmitting, resetForm }: FormikHelpers<Values>) => {
+    try {
+      // const shortUrl = await bitly.shorten(values.urlInput);
+      dispatch({
+        type: IS_ADDING_HISTORY,
+        payload: {
+          url: values.urlInput,
+          shortUrl: '',
+        },
+      });
+      setSubmitting(false);
+      resetForm();
+    } catch (error) {
+      // TODO: proper error handling
+      console.log('error', error);
+      alert('Failed to submit');
+    }
+  };
   return (
     <Formik
       initialValues={{
@@ -35,16 +58,7 @@ const UrlShortener: React.FC = () => {
       validationSchema={Yup.object().shape({
         urlInput: Yup.string().required('Url to shorten is required').test('isValidHttpUrl', 'Invalid url', isValidHttpUrl),
       })}
-      onSubmit={(values: Values, { setSubmitting, resetForm }: FormikHelpers<Values>) => {
-        dispatch({
-          type: IS_ADDING_HISTORY,
-          payload: {
-            url: values.urlInput,
-          },
-        });
-        setSubmitting(false);
-        resetForm();
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({ handleSubmit, handleChange, handleBlur, isSubmitting, values, errors }) => (
         <Form onSubmit={handleSubmit}>
