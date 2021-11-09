@@ -1,16 +1,20 @@
 import React from 'react';
-import Text from '../../Components/Text';
-import { UrlsHistoryWrapper, Wrapper } from './styles';
+import { UrlsHistoryWrapper, Wrapper, LinkWrapper } from './styles';
 
-const UrlListing: React.FC = () => {
+interface UrlHistoryProps {
+  urlHistory: {
+    url?: string; // I assume ID is defined elsewhere
+  }[];
+}
+const UrlListing: React.FC<UrlHistoryProps> = ({ urlHistory }) => {
   return (
     <Wrapper>
-      <Text title="History" fontWeight="600" fontSize="20px" />
       <UrlsHistoryWrapper>
-        <Text title="History" />
-        <Text title="History" />
-        <Text title="History" />
-        <Text title="History" />
+        {urlHistory?.length > 0 ? (
+          urlHistory?.map((item: any) => <LinkWrapper title={item?.url} key={item?.url} />)
+        ) : (
+          <div>No active urls</div>
+        )}
       </UrlsHistoryWrapper>
     </Wrapper>
   );

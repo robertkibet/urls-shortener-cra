@@ -1,0 +1,2 @@
+const IS_ADDING_HISTORY = 'IS_ADDING_HISTORY';
+export default IS_ADDING_HISTORY;
