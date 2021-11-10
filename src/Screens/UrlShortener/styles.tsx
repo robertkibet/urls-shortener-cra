@@ -27,6 +27,7 @@ interface InputWrapperInterface {
 }
 export const InputWrapper = styled.div<InputWrapperInterface>`
   position: relative;
+  display: flex;
 
   span {
     position: absolute;

@@ -14,8 +14,8 @@ const UrlListing: React.FC<UrlHistoryProps> = ({ urlHistory }) => {
       <UrlsHistoryWrapper>
         {urlHistory?.length > 0 ? (
           urlHistory?.map((item: any) => (
-            <CopyToClipboard text={item?.shortUrl || item?.url} onCopy={() => alert('copied')}>
-              <LinkWrapper title={item?.shortUrl || item?.url} key={Math.random()} />
+            <CopyToClipboard key={Math.random()} text={item?.shortUrl || item?.url} onCopy={() => alert('copied')}>
+              <LinkWrapper title={item?.shortUrl || item?.url} />
             </CopyToClipboard>
           ))
         ) : (
