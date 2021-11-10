@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck tinyurl package has no types definitions, doing this to avoid errors
 import React from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { useDispatch } from 'react-redux';
